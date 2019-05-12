@@ -1,0 +1,94 @@
+library(psych)
+
+pdata<-readRDS(file="employees.rds")
+
+#rename columns in kleinschrift
+colnames(pdata)
+names(pdata)[names(pdata) == "employee_ID"] <- "employee_id"
+names(pdata)[names(pdata) == "Satisfaction_team"] <- "satisfaction_team"
+names(pdata)[names(pdata) == "Satisfaction_manager"] <- "satisfaction_manager"
+names(pdata)[names(pdata) == "Satisfaction_training"] <- "satisfaction_training"
+names(pdata)[names(pdata) == "Language_department"] <- "language_department"
+names(pdata)[names(pdata) == "German"] <- "german"
+names(pdata)[names(pdata) == "Salary"] <- "salary"
+names(pdata)[names(pdata) == "Expat_experience"] <- "expat_experience"
+
+# testing for NAs
+which(is.na(pdata$promotion))
+which(is.na(pdata$training))
+which(is.na(pdata$communication_training))
+which(is.na(pdata$performance))
+which(is.na(pdata$satisfaction_team))
+which(is.na(pdata$satisfaction_manager))
+which(is.na(pdata$salary))
+which(is.na(pdata$age))
+which(is.na(pdata$sex))
+which(is.na(pdata$education))
+which(is.na(pdata$german))
+which(is.na(pdata$language_department))
+which(is.na(pdata$department))
+which(is.na(pdata$expat_experience))
+which(is.na(pdata$years_firm))
+which(is.na(pdata$size_team))
+which(is.na(pdata$employee_ID))
+which(is.na(pdata$marital_status))
+which(is.na(pdata$children))
+which(is.na(pdata$satisfaction_training))
+
+#replace shit values by NA
+#employee_ID
+pdata$employee_ID[pdata$employee_id<0]=NA
+#age
+pdata$age[pdata$age<0]=NA
+#department
+pdata$department[pdata$department<0]=NA
+pdata$department[pdata$department>3]=NA
+#sex
+#education
+pdata$education[pdata$education==99]=NA
+pdata$education[pdata$education>8]=NA
+pdata$education[pdata$education<0]=NA
+#marital_status
+pdata$marital_status[pdata$education==9]=NA
+pdata$marital_status[pdata$education>1]=NA
+pdata$marital_status[pdata$education<0]=NA
+#children
+pdata$children[pdata$children==-9]=NA
+pdata$children[pdata$children<0]=NA
+#promotion
+pdata$promotion[pdata$promotion>1]=NA
+pdata$promotion[pdata$promotion<0]=NA
+#training
+pdata$training[pdata$training==99]=NA
+pdata$training[pdata$training>1]=NA
+pdata$training[pdata$training<0]=NA
+#communication_training
+pdata$communication_training[pdata$communication_training==9]=NA
+pdata$communication_training[pdata$communication_training>1]=NA
+pdata$communication_training[pdata$communication_training<0]=NA
+#performance
+pdata$performance[pdata$performance>100]=NA
+pdata$performance[pdata$performance<0]=NA
+#size_team
+pdata$size_team[pdata$size_team<0]=NA
+#satisfaction_team
+pdata$satisfaction_team[pdata$satisfaction_team>10]=NA
+pdata$satisfaction_team[pdata$satisfaction_team<0]=NA
+#satisfaction_manager
+pdata$satisfaction_manager[pdata$satisfaction_manager>10]=NA
+pdata$satisfaction_manager[pdata$satisfaction_manager<0]=NA
+#satisfaction_training
+pdata$satisfaction_training[pdata$satisfaction_training>10]=NA
+pdata$satisfaction_training[pdata$satisfaction_training<0]=NA
+#german
+pdata$german[pdata$german>1]=NA
+pdata$german[pdata$german<0]=NA
+#language_department
+pdata$language_department[pdata$language_department==2]=NA
+pdata$language_department[pdata$language_department>1]=NA
+pdata$language_department[pdata$language_department<0]=NA
+#salary
+pdata$salary[pdata$salary>6]=NA
+pdata$salary[pdata$salary<1]=NA
+#years_firm
+pdata$years_firm[pdata$years_firm<0]=NA
